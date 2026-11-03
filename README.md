@@ -1,10 +1,6 @@
 # Portofoliu personal
 
-Site-portofoliu de o pagină, făcut de la zero, fără framework-uri și fără pas de build. Combină programarea cu desenul: o panglică patchwork în stil art nouveau, cu pătrate de cod C++, curge lent pe fundal pe măsură ce derulezi pagina.
-
-**Demo:** [adaugă linkul după publicare]
-
-<!-- Pune aici o captură de ecran: ![Previzualizare](screenshot.png) -->
+Site-portofoliu de o pagină, făcut de la zero, fără framework-uri.
 
 ## Ce conține
 
@@ -19,12 +15,6 @@ Site-portofoliu de o pagină, făcut de la zero, fără framework-uri și fără
 - JavaScript simplu (vanilla), fără biblioteci
 - `<canvas>` pentru panglica animată
 - Fonturi: Fraunces și Hanken Grotesk, încărcate din Google Fonts
-
-## Cum rulezi local
-
-Nu ai nevoie de nimic instalat. Deschide `index.html` în browser (are nevoie de `content.js` în același folder).
-
-Pentru a schimba textele, editezi `content.js`, apoi reîncarci pagina.
 
 ## Structura
 
@@ -43,9 +33,7 @@ README.md
 
 ## Publicare
 
-Site-ul e static, deci merge pe orice găzduire de fișiere. Pe Cloudflare Pages sau Netlify: conectezi repo-ul, lași comanda de build goală și folderul de publicare pe rădăcină.
-
-Pagina conține `<meta name="robots" content="noindex">`, deci nu e indexată de motoarele de căutare. Dacă vrei să apară în căutări, șterge acea linie din `<head>`.
+Pagina conține `<meta name="robots" content="noindex">`, deci nu e indexată de motoarele de căutare. 
 
 ## Idei pentru mai târziu
 
