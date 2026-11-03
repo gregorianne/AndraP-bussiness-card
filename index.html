@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>[Nume]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6EFB9;      /* galben pal */
+  --ink:#1D2C5B;        /* albastru închis */
+  --blue:#3A63B0;
+  --mint:#BDE6D2;
+  --gold:#C7952F;
+  --coral:#E8765E;
+  --rose:#F0B8C6;
+  --green:#5E9C70;
+  --violet:#7F70B8;
+  --sun:#F2A63E;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --text:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --art:min(52vw,660px);
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--paper);color:var(--ink);scroll-behavior:smooth}
+body{font-family:var(--text);font-size:1.125rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+main{position:relative;overflow:hidden}
+.art{position:fixed;top:0;right:0;height:100vh;width:var(--art);pointer-events:none;z-index:0}
+
+.col{position:relative;padding:0 calc(var(--art) + 2rem) 0 clamp(2.5rem,9vw,8rem);max-width:calc(46rem + var(--art) + clamp(2.5rem,9vw,8rem) + 2rem)}
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:3rem 0}
+h1{font-family:var(--display);font-weight:300;font-variation-settings:"opsz" 144;font-size:clamp(3.4rem,10vw,8rem);line-height:.95;letter-spacing:-.025em}
+h1 .hi{display:block;font-style:italic;font-weight:400;font-size:.38em;letter-spacing:0;line-height:1.3;margin-bottom:.5rem;color:var(--blue)}
+.lead{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.4;font-weight:300;max-width:26em}
+
+section{position:relative;padding:clamp(5rem,16vh,10rem) 0}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(1.8rem,3.4vw,2.4rem);line-height:1.15;margin-bottom:1.5rem}
+p+p{margin-top:1.1rem}
+.now{padding-top:clamp(3rem,10vh,7rem)}
+.contact{padding-top:clamp(2rem,6vh,4rem)}
+.now h2,.contact h2{font-size:clamp(2.4rem,5vw,3.8rem);margin-bottom:1.8rem}
+.now p,.contact p{max-width:34em;font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.55}
+.now li{font-size:clamp(1.05rem,1.55vw,1.25rem)}
+.now li::before{top:1.4rem}
+.now ul:empty{display:none}
+.now ul{list-style:none;margin-top:2.2rem;padding:0;max-width:36rem}
+.now li{padding:.8rem 0 .8rem 1.6rem;position:relative;border-top:1px solid color-mix(in srgb,var(--gold) 55%,transparent)}
+.now li:last-child{border-bottom:0}
+.now li::before{content:"";position:absolute;left:0;top:1.35rem;width:.6rem;height:.6rem;border-radius:50% 50% 50% 0;background:var(--c,var(--blue));transform:rotate(-45deg)}
+
+.links{display:flex;flex-wrap:wrap;gap:1rem 1.2rem;margin-top:1.5rem}
+a{color:inherit}
+.link{font-family:var(--display);font-size:1.35rem;font-weight:400;text-decoration:none;padding:.55rem 1.5rem .6rem;border:1.5px solid var(--ink);border-radius:2rem 2rem 2rem .4rem;background:transparent;transition:background .25s,color .25s,border-radius .25s}
+.link:hover{background:var(--ink);color:var(--paper);border-radius:.4rem 2rem 2rem 2rem}
+.link.alt{border-color:var(--blue);background:var(--mint)}
+.link.alt:hover{background:var(--blue);color:var(--paper);border-color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,var(--paper))}
+
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+.box{width:fit-content;max-width:100%;padding:1.5rem 1.9rem;margin-bottom:.5rem;
+  border:1.1px solid var(--gold);border-radius:2rem 2rem 2rem .5rem;
+  outline:1px solid color-mix(in srgb,var(--gold) 55%,transparent);outline-offset:7px;
+  background:rgba(255,255,255,.22)}
+.hero .box{margin-top:2rem}
+.lang{position:fixed;top:1rem;right:1rem;z-index:5;display:flex;gap:.15rem;padding:.2rem;cursor:pointer;color:var(--ink);background:var(--paper);
+  font:500 .9rem/1 var(--display);border:1.1px solid var(--gold);border-radius:1.2rem 1.2rem 1.2rem .3rem}
+.lang span{padding:.5rem .75rem;border-radius:1rem 1rem 1rem .2rem;transition:background .25s}
+.lang span.on{background:var(--mint)}
+.lang:hover span:not(.on){background:color-mix(in srgb,var(--mint) 45%,transparent)}
+.mini{display:flex;gap:.7rem;margin-top:1.6rem}
+.ico{display:grid;place-items:center;width:2.6rem;height:2.6rem;color:var(--ink);text-decoration:none;border:1.5px solid var(--ink);border-radius:1.3rem 1.3rem 1.3rem .3rem;transition:background .25s,color .25s,border-radius .25s}
+.ico svg{width:1.15rem;height:1.15rem;display:block}
+.ico:hover{background:var(--ink);color:var(--paper);border-radius:.3rem 1.3rem 1.3rem 1.3rem}
+.ico.reveal,.link.reveal{transition:opacity .9s ease,transform .9s ease,background .25s,color .25s,border-radius .25s}
+.tw-word{display:inline-block;white-space:nowrap}
+.tw-ch{opacity:0}
+.tw-ch.on{opacity:1}
+
+@media (max-width:720px){
+  .box{padding:1.1rem 1.25rem}
+  :root{--art:30vw}
+  .col{padding-right:calc(var(--art) + 1rem);padding-left:1.75rem}
+  body{font-size:1.05rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .link{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<main id="main">
+  <canvas class="art" id="art" aria-hidden="true"></canvas>
+
+  <div class="col">
+    <header class="hero">
+      <h1><span class="hi" data-i18n="hero.hi">Salut, sunt</span><span data-site="name">[Nume]</span></h1>
+      <div class="box"><p class="lead" data-i18n="hero.lead">Studentă la Informatică. Am desenat toată viața și acum învăț să scriu cod.</p></div>
+      <div class="mini">
+        <a class="ico" data-site="github" href="https://github.com/[username]" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+        <a class="ico" data-site="email" href="mailto:[email]" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+      </div>
+    </header>
+
+    <section class="now" aria-labelledby="acum">
+      <h2 id="acum" data-i18n="now.h">Ce fac acum</h2>
+      <div class="box">
+      <div data-paras>
+        <p>Sunt în anul [X] la [facultate], [universitate]. Învăț programare orientată pe obiect în Java și îmi construiesc primele proiecte pe GitHub.</p>
+        <p>Vin dintr-un liceu de matematică-informatică și dintr-o viață de desen, grafică și character design. Încerc să le țin pe amândouă la un loc.</p>
+      </div>
+      <ul data-bullets>
+        <li style="--c:var(--blue)">Studiez Informatică și lucrez la proiecte de cod</li>
+        <li style="--c:var(--coral)">Predau desen și pictură copiilor, în tabere, de patru ani</li>
+        <li style="--c:var(--green)">Caut un internship unde să învăț lucruri noi</li>
+      </ul>
+      </div>
+    </section>
+
+    <section class="contact" aria-labelledby="gasesti">
+      <h2 id="gasesti" data-i18n="contact.h">Codul și contactul</h2>
+      <div class="box"><p data-i18n="contact.p">Proiectele mele sunt pe GitHub. Dacă vrei să vorbim, scrie-mi.</p></div>
+      <div class="links">
+        <a class="link" data-site="github" href="https://github.com/[username]">GitHub</a>
+        <a class="link alt" data-site="email" href="mailto:[email]" data-i18n="contact.mail">Scrie-mi</a>
+      </div>
+    </section>
+
+    <footer data-site="footer">[Nume], [an]</footer>
+  </div>
+</main>
+
+<button class="lang" id="lang" type="button"><span data-l="ro">RO</span><span data-l="en">EN</span></button>
+
+<script src="content.js"></script>
+<script>
+/* ============================================================
+   LIMBI + CONȚINUT
+   Textele vin din content.js (window.SITE). Aici doar le punem în pagină.
+   Dacă content.js lipsește, rămâne textul scris direct în HTML.
+   ============================================================ */
+(function(){
+  var S=window.SITE,btn=document.getElementById("lang");
+  if(!S){btn.hidden=true;return}
+  function q(sel){return document.querySelectorAll(sel)}
+  var COLORS=["var(--blue)","var(--coral)","var(--green)","var(--violet)","var(--sun)"];
+  var MAP={"hero.hi":"hi","hero.lead":"lead","now.h":"nowTitle","contact.h":"contactTitle","contact.p":"contactText","contact.mail":"emailButton"};
+
+  /* date comune */
+  q("[data-site=name]").forEach(function(el){el.textContent=S.name});
+  q("[data-site=github]").forEach(function(a){a.href=S.github});
+  q("[data-site=email]").forEach(function(a){a.href="mailto:"+S.email});
+  q("[data-site=footer]").forEach(function(el){el.textContent=S.footer});
+  document.title=S.name;
+
+  var lang="";
+  try{lang=localStorage.getItem("lang")||""}catch(e){}
+  if(!S[lang])lang=((navigator.language||"ro").toLowerCase().indexOf("ro")===0)?"ro":"en";
+
+  function apply(l,fromToggle){
+    lang=l;document.documentElement.lang=l;
+    var T=S[l]||{};
+    q("[data-i18n]").forEach(function(el){
+      var v=T[MAP[el.getAttribute("data-i18n")]];
+      if(v==null)return;
+      el.textContent=v;
+      if(fromToggle){var h=el.closest("h1,h2");if(h&&window.fxRebuild)window.fxRebuild(h)}
+    });
+    q("[data-paras]").forEach(function(box){
+      box.textContent="";
+      (T.paragraphs||[]).forEach(function(t){var p=document.createElement("p");p.textContent=t;box.appendChild(p)});
+    });
+    q("[data-bullets]").forEach(function(ul){
+      ul.textContent="";
+      (T.bullets||[]).forEach(function(t,i){
+        var li=document.createElement("li");li.style.setProperty("--c",COLORS[i%COLORS.length]);li.textContent=t;ul.appendChild(li);
+      });
+    });
+    btn.setAttribute("aria-label",T.switchLabel||"");
+    btn.setAttribute("title",T.switchLabel||"");
+    btn.querySelectorAll("[data-l]").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-l")===l)});
+  }
+  btn.addEventListener("click",function(){
+    var next=lang==="ro"?"en":"ro";
+    apply(next,true);
+    try{localStorage.setItem("lang",next)}catch(e){}
+  });
+  apply(lang,false);
+})();
+</script>
+
+
+<script>
+(function(){
+  var cv=document.getElementById("art"),ctx=cv.getContext("2d"),main=document.getElementById("main");
+  var calm=window.matchMedia("(prefers-reduced-motion: reduce)");
+  var P=["#BDE6D2","#3A63B0","#F0B8C6","#F2A63E","#E8765E","#5E9C70","#7F70B8","#F6EFB9","#DCEFE5","#1D2C5B"];
+  var PAPER="#F6EFB9",GOLD="#C7952F";
+  var OA={cx:.5,a1:.17,f1:330,p1:0,a2:.06,f2:120,p2:1,w:.155,dw:.05,fw:210,pw:2};
+  var OB={cx:.5,a1:.17,f1:330,p1:2.1,a2:.07,f2:150,p2:0,w:.055,dw:.02,fw:260,pw:0};
+  var seed=1,tex=null,texDpr=1,cvDpr=1,W=0,H=0,CW=0,CH=0,dirty=true,t0=null,last=0;
+  function rnd(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}
+  function pick(a){return a[Math.floor(rnd()*a.length)]}
+
+  /* ---------- textura patchwork (se desenează o singură dată) ---------- */
+  var SNIP=[
+    ['#include <iostream>','using namespace std;'],
+    ['int main() {','  cout << "<3";','  return 0;','}'],
+    ['for (auto& x : v)','  x *= 2;'],
+    ['class Art {','public:','  void draw();','};'],
+    ['std::vector<int> v;','v.push_back(7);'],
+    ['if (code && art)','  smile();'],
+    ['// salut!','int n = 42;'],
+    ['template <typename T>','T pick(T a, T b);'],
+    ['auto f = [](int x)','{ return x + 1; };']
+  ];
+  var THEMES=[
+    {bg:"#1D2C5B",t:"#F6EFB9",k:"#F0B8C6",s:"#BDE6D2",c:"#8FA2D4"},
+    {bg:"#F6EFB9",t:"#1D2C5B",k:"#3A63B0",s:"#5E9C70",c:"#C7952F"},
+    {bg:"#BDE6D2",t:"#1D2C5B",k:"#7F70B8",s:"#2F6B45",c:"#4A7B67"},
+    {bg:"#3A63B0",t:"#F6EFB9",k:"#F2A63E",s:"#BDE6D2",c:"#B9C8EA"}
+  ];
+  var KW=/^(int|class|for|auto|if|return|public|template|typename|include|void|std|cout|const|using|namespace)$/;
+  var MONO="ui-monospace,Menlo,Consolas,monospace";
+
+  function codeSquare(g,x,y,s,lines,th){
+    g.save();g.translate(x,y);g.rotate((rnd()*10-5)*Math.PI/180);
+    g.fillStyle=th.bg;g.fillRect(-s/2,-s/2,s,s);
+    g.strokeStyle=PAPER;g.lineWidth=1.6;g.strokeRect(-s/2,-s/2,s,s);
+    g.beginPath();g.rect(-s/2,-s/2,s,s);g.clip();
+    var fs=Math.max(5,s*.105);g.font=fs+"px "+MONO;g.textBaseline="top";
+    var ly=-s/2+s*.13;
+    lines.forEach(function(ln){
+      var lx=-s/2+s*.1;
+      (ln.match(/\s+|"[^"]*"|\/\/.*|#?[A-Za-z_]+|[^\sA-Za-z_]/g)||[]).forEach(function(tk){
+        g.fillStyle=/^\/\//.test(tk)?th.c:/^"/.test(tk)?th.s:KW.test(tk.replace("#",""))?th.k:th.t;
+        g.fillText(tk,lx,ly);lx+=g.measureText(tk).width;
+      });
+      ly+=fs*1.5;
+    });
+    g.restore();
+  }
+  function flower(g,x,y,s){
+    var c1=pick(P),c2=pick(P);
+    g.fillStyle=c1;
+    for(var i=0;i<5;i++){var a=i*72*Math.PI/180;g.beginPath();g.arc(x+Math.cos(a)*s*.55,y+Math.sin(a)*s*.55,s*.42,0,7);g.fill()}
+    g.fillStyle=c2;g.beginPath();g.arc(x,y,s*.3,0,7);g.fill();
+  }
+  function leaf(g,x,y,s){
+    g.save();g.translate(x,y);g.rotate(rnd()*Math.PI);g.scale(.6,1);
+    g.fillStyle=pick(["#5E9C70","#BDE6D2","#3A63B0"]);
+    g.beginPath();g.moveTo(0,-s);g.bezierCurveTo(s*.8,-s*.4,s*.8,s*.4,0,s);g.bezierCurveTo(-s*.8,s*.4,-s*.8,-s*.4,0,-s);g.fill();
+    g.strokeStyle=PAPER;g.lineWidth=1.4;g.beginPath();g.moveTo(0,-s);g.lineTo(0,s);g.stroke();
+    g.restore();
+  }
+  function stripes(g,x,y,s){
+    g.save();g.translate(x,y);g.rotate(rnd()*Math.PI);g.fillStyle=pick(P);
+    for(var i=-2;i<=2;i++)g.fillRect(-s,i*s*.3-1.5,s*2,3);
+    g.restore();
+  }
+
+  function buildTex(){
+    seed=20260;
+    W=cv.clientWidth;H=Math.max(document.documentElement.scrollHeight,cv.clientHeight);
+    if(W<2||cv.clientHeight<2){tex=null;return}
+    texDpr=Math.min(window.devicePixelRatio||1,2);
+    while(H*texDpr>8000&&texDpr>1)texDpr-=.25;
+    tex=document.createElement("canvas");tex.width=Math.round(W*texDpr);tex.height=Math.round(H*texDpr);
+    var g=tex.getContext("2d");g.scale(texDpr,texDpr);
+    g.fillStyle="#BDE6D2";g.fillRect(0,0,W,H);
+    var cell=Math.min(70,Math.max(34,W/7));
+    for(var y=-cell;y<H+cell;y+=cell*.8){
+      for(var x=-cell;x<W+cell;x+=cell*.8){
+        var cx=x+rnd()*cell*.5,cy=y+rnd()*cell*.5,s=cell*(.7+rnd()*.7),m=rnd();
+        if(m<.2){codeSquare(g,cx,cy,cell*1.55,pick(SNIP),pick(THEMES));continue}
+        g.save();g.translate(cx,cy);g.rotate((rnd()*60-30)*Math.PI/180);
+        g.fillStyle=pick(P);g.fillRect(-s/2,-s/2,s,s);
+        g.strokeStyle=PAPER;g.lineWidth=1.6;g.strokeRect(-s/2,-s/2,s,s);
+        g.restore();
+        var q=rnd();
+        if(q<.35)flower(g,cx,cy,s*.28);else if(q<.7)leaf(g,cx,cy,s*.34);else if(q<.85)stripes(g,cx,cy,s*.3);
+      }
+    }
+    dirty=true;
+  }
+
+  /* ---------- panglica care curge (se redesenează la fiecare cadru) ---------- */
+  function sample(o,ys,t,u){
+    var cxs=[],hws=[],tt=t*(o.k||1);
+    for(var i=0;i<ys.length;i++){
+      var y=ys[i];
+      cxs.push(CW*o.cx+CW*o.a1*Math.sin(y/o.f1+o.p1+tt*.32)+CW*o.a2*Math.sin(y/o.f2+o.p2-tt*.5));
+      hws.push(CW*(o.w+o.dw*Math.sin(y/o.fw+o.pw+tt*.22))*u);
+    }
+    return {x:cxs,h:hws};
+  }
+  function polygon(c,ys,r){
+    var n=ys.length,i;
+    c.moveTo(r.x[0]-r.h[0],ys[0]);
+    for(i=1;i<n;i++)c.lineTo(r.x[i]-r.h[i],ys[i]);
+    for(i=n-1;i>=0;i--)c.lineTo(r.x[i]+r.h[i],ys[i]);
+    c.closePath();
+  }
+  function edge(c,ys,r,side,d){
+    for(var i=0;i<ys.length;i++){
+      var x=r.x[i]+side*r.h[i]+d;
+      if(i)c.lineTo(x,ys[i]);else c.moveTo(x,ys[i]);
+    }
+  }
+
+  function resize(){
+    cvDpr=Math.min(window.devicePixelRatio||1,2);
+    CW=cv.clientWidth;CH=cv.clientHeight;
+    cv.width=Math.round(CW*cvDpr);cv.height=Math.round(CH*cvDpr);
+    ctx.setTransform(cvDpr,0,0,cvDpr,0,0);
+    buildTex();
+  }
+
+  function draw(now){
+    if(!tex||!tex.width||!tex.height||!CW||!CH)return;
+    if(t0===null)t0=now;
+    var el=(now-t0)/1000;
+    var t=calm.matches?0:el;
+    var k=calm.matches?1:Math.min(1,el/2.2),u=1-Math.pow(1-k,3);
+    var y0=window.scrollY,ys=[];
+    for(var y=y0-14;y<=y0+CH+14;y+=12)ys.push(y-y0);
+    var abs=ys.map(function(v){return v+y0});
+    var A=sample(OA,abs,t,u),B=sample(OB,abs,t,u);
+    ctx.clearRect(0,0,CW,CH);
+    ctx.save();
+    ctx.beginPath();polygon(ctx,ys,A);polygon(ctx,ys,B);ctx.clip();
+    var sy=Math.max(0,Math.min(y0,H-CH));
+    ctx.drawImage(tex,0,sy*texDpr,CW*texDpr,CH*texDpr,0,0,CW,CH);
+    ctx.restore();
+    ctx.strokeStyle=GOLD;ctx.lineWidth=1.1;ctx.lineCap="round";ctx.globalAlpha=u;
+    ctx.beginPath();
+    edge(ctx,ys,A,-1,-9);edge(ctx,ys,A,1,9);edge(ctx,ys,A,1,22);edge(ctx,ys,A,-1,-24);
+    edge(ctx,ys,B,-1,-8);edge(ctx,ys,B,1,8);
+    ctx.stroke();ctx.globalAlpha=1;
+    dirty=false;
+  }
+
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(!tex)return;
+    if(calm.matches){if(!dirty)return}
+    else if(now-last<30)return;   /* ~33 cadre/s, suficient pentru o mișcare lentă */
+    last=now;draw(now);
+  }
+
+  var rt;
+  function rebuild(){clearTimeout(rt);rt=setTimeout(resize,150)}
+  window.addEventListener("resize",rebuild);
+  window.addEventListener("scroll",function(){dirty=true},{passive:true});
+  window.addEventListener("load",rebuild);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(rebuild);
+  if(window.ResizeObserver){var ro=new ResizeObserver(rebuild);ro.observe(main);ro.observe(cv)}
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* ============================================================
+   EFECTE LA SCROLL: fade-in pentru text/butoane + typewriter pentru titluri
+   Se rulează o singură dată pentru fiecare element, prima dată când îl vezi.
+   ============================================================ */
+(function(){
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window))return;
+
+  /* ---------- 1. FADE-IN ----------
+     FADE_TARGETS = ce elemente apar cu fade (selectori CSS)
+     FADE_STAGGER = pauza (ms) între elementele care apar deodată
+     HERO_DELAY   = cât așteaptă textul din prima secțiune, ca să apuce să se scrie numele
+     Cât de lent/mare e fade-ul: în CSS, la .reveal (transition și translateY). */
+  var FADE_TARGETS=".box, .link, footer, .ico";
+  var FADE_STAGGER=90, HERO_DELAY=1400;
+
+  /* Elementele din afara primului ecran (hero) se animă abia după ce utilizatorul dă primul scroll,
+     ca să nu se vadă animația la pornirea site-ului. */
+  function afterFirstScroll(fn){
+    if(window.scrollY>30){fn();return}
+    function on(){if(window.scrollY>30){window.removeEventListener("scroll",on);fn()}}
+    window.addEventListener("scroll",on,{passive:true});
+  }
+
+  var fadeIO=new IntersectionObserver(function(entries){
+    var n=0;
+    entries.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var el=en.target;fadeIO.unobserve(el);
+      var wait=(el.closest(".hero")?HERO_DELAY:0)+(n++)*FADE_STAGGER;
+      setTimeout(function(){el.classList.add("in")},wait);
+    });
+  },{threshold:.2,rootMargin:"0px 0px -12% 0px"});
+  var lateFade=[];
+  document.querySelectorAll(FADE_TARGETS).forEach(function(el){
+    el.classList.add("reveal");
+    if(el.closest(".hero"))fadeIO.observe(el);else lateFade.push(el);
+  });
+  afterFirstScroll(function(){lateFade.forEach(function(el){fadeIO.observe(el)})});
+
+  /* ---------- 2. TYPEWRITER ----------
+     TYPE_TARGETS = ce titluri se scriu literă cu literă
+     TYPE_SPEED   = milisecunde între litere (mai mic = mai repede)
+     TYPE_START   = întârzierea titlului din prima secțiune (numele) */
+  var TYPE_TARGETS="h1, h2";
+  var TYPE_SPEED=55, TYPE_START=700;
+
+  function split(node,chars){
+    Array.prototype.slice.call(node.childNodes).forEach(function(c){
+      if(c.nodeType===3){
+        var frag=document.createDocumentFragment();
+        c.nodeValue.split(/(\s+)/).forEach(function(part){
+          if(!part)return;
+          if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return}
+          var w=document.createElement("span");w.className="tw-word";
+          part.split("").forEach(function(ch){
+            var s=document.createElement("span");s.className="tw-ch";s.textContent=ch;
+            w.appendChild(s);chars.push(s);
+          });
+          frag.appendChild(w);
+        });
+        c.parentNode.replaceChild(frag,c);
+      }else if(c.nodeType===1)split(c,chars);
+    });
+  }
+
+  /* apelat de scriptul de limbă după ce schimbă textul unui titlu */
+  function unsplit(n){
+    n.querySelectorAll(".tw-word").forEach(function(w){w.replaceWith(document.createTextNode(w.textContent))});
+    n.normalize();
+  }
+  window.fxRebuild=function(h){
+    unsplit(h);
+    h.setAttribute("aria-label",(h.innerText||h.textContent).replace(/\s+/g," ").trim());
+    h._chars=[];split(h,h._chars);
+    if(h._typed)h._chars.forEach(function(s){s.classList.add("on")});
+  };
+
+  var typeIO=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var h=en.target;typeIO.unobserve(h);h._typed=true;
+      var start=h.tagName==="H1"?TYPE_START:0;
+      h._chars.forEach(function(s,i){setTimeout(function(){s.classList.add("on")},start+i*TYPE_SPEED)});
+    });
+  },{threshold:.6,rootMargin:"0px 0px -8% 0px"});
+  var lateType=[];
+  document.querySelectorAll(TYPE_TARGETS).forEach(function(h){
+    h.setAttribute("aria-label",(h.innerText||h.textContent).replace(/\s+/g," ").trim());
+    h._chars=[];split(h,h._chars);
+    if(h.closest(".hero"))typeIO.observe(h);else lateType.push(h);
+  });
+  afterFirstScroll(function(){lateType.forEach(function(h){typeIO.observe(h)})});
+})();
+</script>
+</body>
+</html>
