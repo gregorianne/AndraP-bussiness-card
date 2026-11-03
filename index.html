@@ -7,7 +7,7 @@
 <title>[Nume]</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#F6EFB9;      /* galben pal */
@@ -21,7 +21,7 @@
   --violet:#7F70B8;
   --sun:#F2A63E;
   --display:"Fraunces",Georgia,"Times New Roman",serif;
-  --text:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:"Fraunces",Georgia,"Times New Roman",serif;
   --art:min(52vw,660px);
 }
 *{box-sizing:border-box;margin:0}
@@ -32,9 +32,9 @@ main{position:relative;overflow:hidden}
 
 .col{position:relative;padding:0 calc(var(--art) + 2rem) 0 clamp(2.5rem,9vw,8rem);max-width:calc(46rem + var(--art) + clamp(2.5rem,9vw,8rem) + 2rem)}
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:3rem 0}
-h1{font-family:var(--display);font-weight:300;font-variation-settings:"opsz" 144;font-size:clamp(3.4rem,10vw,8rem);line-height:.95;letter-spacing:-.025em}
+h1{font-family:var(--display);font-weight:600;font-variation-settings:"opsz" 48;font-size:clamp(3.4rem,10vw,8rem);line-height:.95;letter-spacing:-.025em}
 h1 .hi{display:block;font-style:italic;font-weight:400;font-size:.38em;letter-spacing:0;line-height:1.3;margin-bottom:.5rem;color:var(--blue)}
-.lead{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.4;font-weight:300;max-width:26em}
+.lead{font-family:var(--display);font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.4;font-weight:400;max-width:26em}
 
 section{position:relative;padding:clamp(5rem,16vh,10rem) 0}
 h2{font-family:var(--display);font-weight:500;font-size:clamp(1.8rem,3.4vw,2.4rem);line-height:1.15;margin-bottom:1.5rem}
