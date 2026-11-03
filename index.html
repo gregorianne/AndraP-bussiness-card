@@ -91,6 +91,10 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
   .link{transition:none}
   html{scroll-behavior:auto}
 }
+/* cursor: frunză verde închis (doar pe dispozitive cu mouse); vârful frunzei e punctul de click (7 7) */
+@media (hover:hover) and (pointer:fine){
+  html,a,button,.lang,.link,.ico{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg transform='translate(16 16) rotate(-45) scale(.6 1)'%3E%3Cpath d='M0 -13C10.4 -5.2 10.4 5.2 0 13C-10.4 5.2 -10.4 -5.2 0 -13Z' fill='%232A5C3C' stroke='%23F6EFB9' stroke-width='1.6' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M0 -13L0 13' stroke='%23F6EFB9' stroke-width='1.4' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E") 7 7,auto}
+}
 </style>
 </head>
 <body>
@@ -290,11 +294,21 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
   }
 
   /* ---------- panglica care curge (se redesenează la fiecare cadru) ---------- */
+  /* mouse: poziție netezită (x relativ la canvas, y absolut în pagină) și cât de „activ" e (0..1) */
+  var M={x:0,y:0,ay:0,tx:0,ty:0,a:0,ta:0};
+  var PULL=.32;   /* cât de tare se apropie panglica de mouse (0 = deloc, 1 = ajunge exact la el) */
+
   function sample(o,ys,t,u){
     var cxs=[],hws=[],tt=t*(o.k||1);
+    var R=Math.max(140,CH*.2);                      /* pe ce înălțime se simte efectul */
+    var mc=Math.max(0,Math.min(CW,M.x));            /* mouse-ul, limitat la lățimea canvasului */
+    var out=Math.abs(M.x-mc)/260;                   /* cu cât e mouse-ul mai departe de panglică, cu atât efectul scade */
+    var strength=PULL*M.a*Math.exp(-out*out)*u;
     for(var i=0;i<ys.length;i++){
       var y=ys[i];
-      cxs.push(CW*o.cx+CW*o.a1*Math.sin(y/o.f1+o.p1+tt*.32)+CW*o.a2*Math.sin(y/o.f2+o.p2-tt*.5));
+      var cx=CW*o.cx+CW*o.a1*Math.sin(y/o.f1+o.p1+tt*.32)+CW*o.a2*Math.sin(y/o.f2+o.p2-tt*.5);
+      if(strength>.001){var dy=(y-M.ay)/R;cx+=(mc-cx)*strength*Math.exp(-dy*dy)}
+      cxs.push(cx);
       hws.push(CW*(o.w+o.dw*Math.sin(y/o.fw+o.pw+tt*.22))*u);
     }
     return {x:cxs,h:hws};
@@ -328,6 +342,9 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
     var t=calm.matches?0:el;
     var k=calm.matches?1:Math.min(1,el/2.2),u=1-Math.pow(1-k,3);
     var y0=window.scrollY,ys=[];
+    if(M.a<.01&&M.ta){M.x=M.tx;M.y=M.ty}            /* prima apariție: nu „zboară" panglica de la 0 */
+    M.x+=(M.tx-M.x)*.14;M.y+=(M.ty-M.y)*.14;M.a+=(M.ta-M.a)*.08;
+    M.ay=M.y+y0;
     for(var y=y0-14;y<=y0+CH+14;y+=12)ys.push(y-y0);
     var abs=ys.map(function(v){return v+y0});
     var A=sample(OA,abs,t,u),B=sample(OB,abs,t,u);
@@ -351,6 +368,15 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
     if(calm.matches){if(!dirty)return}
     else if(now-last<30)return;   /* ~33 cadre/s, suficient pentru o mișcare lentă */
     last=now;draw(now);
+  }
+
+  /* mouse-ul influențează panglica doar pe dispozitive cu mouse și fără „reduce motion" */
+  if(window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+    window.addEventListener("mousemove",function(e){
+      if(calm.matches)return;
+      M.tx=e.clientX-cv.getBoundingClientRect().left;M.ty=e.clientY;M.ta=1;
+    },{passive:true});
+    document.documentElement.addEventListener("mouseleave",function(){M.ta=0});
   }
 
   var rt;
