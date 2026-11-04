@@ -1,6 +1,7 @@
 # Portofoliu personal
 
-Site-portofoliu de o pagină, făcut de la zero, fără framework-uri.
+Site-portofoliu de o pagină/ Business card digital.
+More to come! ^^ Versiune 1.1
 
 ## Ce conține
 
