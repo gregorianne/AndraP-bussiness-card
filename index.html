@@ -5,10 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Andra P!</title>
+<meta name="description" content="Portofoliu personal: studentă la Informatică, cu proiecte de cod și experiență în desen și grafică.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<script>
+/* ascunde textul-placeholder până când content.js îl completează; rețea de siguranță după 2,5 s */
+document.documentElement.classList.add("js");
+setTimeout(function(){document.documentElement.classList.add("ready")},2500);
+</script>
 <style>
+html.js:not(.ready) .col,html.js:not(.ready) .lang{visibility:hidden}
 :root{
   --paper:#F6EFB9;      /* galben pal */
   --ink:#1D2C5B;        /* albastru închis */
@@ -51,6 +58,16 @@ p+p{margin-top:1.1rem}
 .now li:last-child{border-bottom:0}
 .now li::before{content:"";position:absolute;left:0;top:1.35rem;width:.6rem;height:.6rem;border-radius:50% 50% 50% 0;background:var(--c,var(--blue));transform:rotate(-45deg)}
 
+.work{padding-top:clamp(2rem,6vh,4rem)}
+.work h2{font-size:clamp(2.4rem,5vw,3.8rem);margin-bottom:1.8rem}
+.work:has(.cards:empty){display:none}
+.cards{display:grid;gap:1.6rem;max-width:36rem}
+.proj.box{width:100%}
+.proj h3{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);line-height:1.2;margin-bottom:.5rem}
+.proj p{font-size:clamp(1.02rem,1.5vw,1.2rem);line-height:1.5}
+.tags{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem .5rem;padding:0;margin-top:1rem}
+.tags li{font-size:.85rem;line-height:1;padding:.4rem .75rem .45rem;border:1px solid var(--blue);border-radius:1rem 1rem 1rem .25rem;background:color-mix(in srgb,var(--mint) 55%,transparent)}
+.proj-link{display:inline-block;margin-top:1rem;font-size:1.05rem;text-underline-offset:.25em}
 .links{display:flex;flex-wrap:wrap;gap:1rem 1.2rem;margin-top:1.5rem}
 a{color:inherit}
 .link{font-family:var(--display);font-size:1.35rem;font-weight:400;text-decoration:none;padding:.55rem 1.5rem .6rem;border:1.5px solid var(--ink);border-radius:2rem 2rem 2rem .4rem;background:transparent;transition:background .25s,color .25s,border-radius .25s}
@@ -126,6 +143,11 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
       </div>
     </section>
 
+    <section class="work" aria-labelledby="proiecte">
+      <h2 id="proiecte" data-i18n="work.h">Portofoliu</h2>
+      <div class="cards" data-projects></div>
+    </section>
+
     <section class="contact" aria-labelledby="gasesti">
       <h2 id="gasesti" data-i18n="contact.h">Codul și contactul</h2>
       <div class="box"><p data-i18n="contact.p">Proiectele mele sunt pe GitHub. Dacă vrei să vorbim, scrie-mi.</p></div>
@@ -135,7 +157,7 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
       </div>
     </section>
 
-    <footer data-site="footer">[Nume], [an]</footer>
+    <footer data-site="footer"></footer>
   </div>
 </main>
 
@@ -153,7 +175,7 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
   if(!S){btn.hidden=true;return}
   function q(sel){return document.querySelectorAll(sel)}
   var COLORS=["var(--blue)","var(--coral)","var(--green)","var(--violet)","var(--sun)"];
-  var MAP={"hero.hi":"hi","hero.lead":"lead","now.h":"nowTitle","contact.h":"contactTitle","contact.p":"contactText","contact.mail":"emailButton"};
+  var MAP={"hero.hi":"hi","hero.lead":"lead","now.h":"nowTitle","work.h":"workTitle","contact.h":"contactTitle","contact.p":"contactText","contact.mail":"emailButton"};
 
   /* date comune */
   q("[data-site=name]").forEach(function(el){el.textContent=S.name});
@@ -183,6 +205,24 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
       ul.textContent="";
       (T.bullets||[]).forEach(function(t,i){
         var li=document.createElement("li");li.style.setProperty("--c",COLORS[i%COLORS.length]);li.textContent=t;ul.appendChild(li);
+      });
+    });
+    q("[data-projects]").forEach(function(box){
+      box.textContent="";
+      (T.projects||[]).forEach(function(p){
+        var a=document.createElement("article");a.className="box proj";
+        var t=document.createElement("h3");t.textContent=p.name;a.appendChild(t);
+        var d=document.createElement("p");d.textContent=p.text;a.appendChild(d);
+        if(p.tags&&p.tags.length){
+          var ul=document.createElement("ul");ul.className="tags";
+          p.tags.forEach(function(x){var li=document.createElement("li");li.textContent=x;ul.appendChild(li)});
+          a.appendChild(ul);
+        }
+        if(p.link){
+          var l=document.createElement("a");l.className="proj-link";l.href=p.link;if(/^https?:/.test(p.link)){l.target="_blank";l.rel="noopener"}
+          l.textContent=p.linkText||"GitHub →";a.appendChild(l);
+        }
+        box.appendChild(a);
       });
     });
     btn.setAttribute("aria-label",T.switchLabel||"");
@@ -485,5 +525,6 @@ footer{padding:0 0 3rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,
   afterFirstScroll(function(){lateType.forEach(function(h){typeIO.observe(h)})});
 })();
 </script>
+<script>document.documentElement.classList.add("ready");</script>
 </body>
 </html>
