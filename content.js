@@ -20,8 +20,16 @@ window.SITE = {
      Pune pozele în folderul "desene/" și adaugă câte o linie aici.
      ro / en = descrierea pozei (apare la mărire și pentru cititoarele de ecran). */
   gallery: [
-     { src: "desene/design_trad1.jpeg", ro: "Desen in creion 1", en: "Pencil drawing 1" },
-    // { src: "desene/02.jpg", ro: "Alt desen",        en: "Another drawing" },
+     { src: "desene/1.png", ro: "Mesagerul", en: "The Messenger" },
+     { src: "desene/2.png", ro: "Studiu de chip masculin", en: "Male face study" },
+     { src: "desene/3.png", ro: "Studiu de culoare", en: "Saturated coloring study" },
+     { src: "desene/4.png", ro: "Studiu de profil feminin", en: "Female profile study" },
+     { src: "desene/5.png", ro: "Meet the artist", en: "Meet the artist" },
+     { src: "desene/6.png", ro: "Studiu de pozitie dinamica, Inktober", en: "Dynamic pose study, Inktober" },
+     { src: "desene/7.png", ro: "Van Gogh cu flori", en: "Van Gogh with sunflowers" },
+     { src: "desene/8.png", ro: "Schite diverse", en: "Sketches" },
+     { src: "desene/9.png", ro: "Pahar de fructe", en: "Strawberry cup" },
+     { src: "desene/10.png", ro: "Doodle in acuarela", en: "Watercolor doodle" }
   ],
 
   /* ---- Română ---- */
