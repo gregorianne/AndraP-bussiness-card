@@ -35,7 +35,14 @@ window.SITE = {
     galleryBack:  "← Înapoi",
     galleryClose: "Închide",
     galleryEmpty: "Desenele vin în curând.",
+    galleryRights: "Toate drepturile rezervate.",
     projects: [
+      {
+        name: "Toy Network",
+        text: "Rețea de socializare în Java, construită cu principii OOP: clase, moștenire, interfețe, colecții și fișiere.",
+        tags: ["Java", "OOP"]
+        // link: "https://github.com/gregorianne/NUME-REPO",   <- adaugă linkul repo-ului când îl ai
+      },
       {
         name: "Site-portofoliu",
         text: "Site de o pagină, în română și engleză, cu panglică patchwork animată pe canvas și efecte la scroll. Publicat pe GitHub Pages.",
@@ -48,12 +55,6 @@ window.SITE = {
         tags: ["Desen", "Character design", "Krita"],
         link: "galerie.html",
         linkText: "Vezi galeria →"
-      },
-      {
-        name: "Toy Network",
-        text: "Rețea de socializare în Java, construită cu principii OOP: clase, moștenire, interfețe, colecții și fișiere.",
-        tags: ["Java", "OOP"]
-        // link: "https://github.com/gregorianne/NUME-REPO",   <- adaugă linkul repo-ului când îl ai
       }
     ],
 
@@ -86,6 +87,7 @@ window.SITE = {
     galleryBack:  "← Back",
     galleryClose: "Close",
     galleryEmpty: "Drawings coming soon.",
+    galleryRights: "All rights reserved.",
     projects: [
       {
         name: "Toy Network",
