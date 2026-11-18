@@ -117,7 +117,7 @@ footer{margin-top:2rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,v
       b.style.animationDelay=Math.min(i,12)*60+"ms";
       var img=document.createElement("img");
       img.src=it.src;img.alt=it[l]||it.ro||it.en||"";img.loading="lazy";img.decoding="async";
-      img.onerror=function(){b.remove();check()};   /* fișier lipsă: nu afișa icoana ruptă */
+      img.onerror=function(){b.remove();check()};   /* fișier lipsă: nu afișa iconita broken */
       b.appendChild(img);
       b.addEventListener("click",function(){open(img.src,img.alt)});
       grid.appendChild(b);
