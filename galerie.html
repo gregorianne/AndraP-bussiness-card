@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex, nofollow, noai, noimageai">
 <title>Galerie</title>
 <script>
 /* ascunde pagina până când content.js o completează; rețea de siguranță după 2,5 s */
@@ -42,7 +42,15 @@ h1{font-weight:600;font-variation-settings:"opsz" 48;font-size:clamp(3rem,8vw,6r
   outline:1px solid color-mix(in srgb,var(--gold) 55%,transparent);outline-offset:5px;
   animation:rise .7s ease both;transition:transform .25s}
 .shot:hover{transform:translateY(-3px)}
+.shot{position:relative}
 .shot img{display:block;width:100%;height:auto}
+.shot::after,.lbbox::after{content:attr(data-wm);position:absolute;right:.7rem;bottom:.55rem;pointer-events:none;user-select:none;-webkit-user-select:none;
+  font:italic 400 .9rem/1 var(--display);color:rgba(255,255,255,.78);text-shadow:0 0 3px rgba(0,0,0,.65),0 0 1px rgba(0,0,0,.8)}
+.tip{position:fixed;left:0;top:0;z-index:15;max-width:16rem;padding:.4rem .8rem .45rem;font-size:.95rem;line-height:1.3;color:var(--ink);
+  background:var(--paper);border:1.1px solid var(--gold);border-radius:1rem 1rem 1rem .25rem;pointer-events:none;opacity:0;transition:opacity .15s}
+.tip.on{opacity:1}
+.lbbox{position:relative;display:inline-block;line-height:0}
+.lbbox::after{font-size:1.05rem;right:1rem;bottom:.9rem}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .empty{font-size:1.2rem;padding:1.5rem 1.9rem;width:fit-content;max-width:100%;border:1.1px solid var(--gold);border-radius:2rem 2rem 2rem .5rem;background:rgba(255,255,255,.22)}
 
@@ -61,7 +69,7 @@ footer{margin-top:2rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,v
 
 @media (prefers-reduced-motion:reduce){
   .shot{animation:none;transition:none}
-  .back{transition:none}
+  .back,.tip{transition:none}
 }
 /* cursor: frunză verde închis (doar pe dispozitive cu mouse); vârful frunzei e punctul de click (7 7) */
 @media (hover:hover) and (pointer:fine){
@@ -80,9 +88,11 @@ footer{margin-top:2rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,v
   <footer id="foot"></footer>
 </div>
 
+<div class="tip" id="tip" aria-hidden="true"></div>
+
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true">
   <button type="button" id="lbx">✕</button>
-  <img id="lbimg" alt="">
+  <div class="lbbox" id="lbbox"><img id="lbimg" alt=""></div>
   <p id="lbcap"></p>
 </div>
 
@@ -100,6 +110,15 @@ footer{margin-top:2rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,v
   if(!S[lang])lang=((navigator.language||"ro").toLowerCase().indexOf("ro")===0)?"ro":"en";
 
   var items=(S.gallery||[]);
+  /* mic plutitor care urmărește cursorul peste o poză (doar cu mouse) */
+  var tip=$("tip"),fine=window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  function tipMove(e){
+    var w=tip.offsetWidth,h=tip.offsetHeight,x=e.clientX+18,y=e.clientY+18;
+    if(x+w>window.innerWidth-8)x=e.clientX-w-12;
+    if(y+h>window.innerHeight-8)y=e.clientY-h-12;
+    tip.style.transform="translate("+x+"px,"+y+"px)";
+  }
+  function wm(){return "© "+String(S.name||"").replace(/\s+/g," ").trim()}
 
   function apply(l){
     lang=l;document.documentElement.lang=l;
@@ -109,16 +128,22 @@ footer{margin-top:2rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,v
     $("intro").textContent=T.galleryText||"";
     $("back").textContent=T.galleryBack||"←";
     $("lbx").setAttribute("aria-label",T.galleryClose||"Close");
-    $("foot").textContent=S.footer||"";
+    $("foot").textContent=wm()+(T.galleryRights?(/\.$/.test(wm())?" ":". ")+T.galleryRights:"");
 
     var grid=$("grid");grid.textContent="";
     items.forEach(function(it,i){
       var b=document.createElement("button");b.type="button";b.className="shot";
+      b.setAttribute("data-wm",wm());
       b.style.animationDelay=Math.min(i,12)*60+"ms";
       var img=document.createElement("img");
       img.src=it.src;img.alt=it[l]||it.ro||it.en||"";img.loading="lazy";img.decoding="async";
-      img.onerror=function(){b.remove();check()};   /* fișier lipsă: nu afișa iconita broken */
+      img.onerror=function(){b.remove();check()};   /* fișier lipsă: nu afișa icoana ruptă */
       b.appendChild(img);
+      if(fine){
+        b.addEventListener("mouseenter",function(e){if(!img.alt)return;tip.textContent=img.alt;tipMove(e);tip.classList.add("on")});
+        b.addEventListener("mousemove",tipMove);
+        b.addEventListener("mouseleave",function(){tip.classList.remove("on")});
+      }
       b.addEventListener("click",function(){open(img.src,img.alt)});
       grid.appendChild(b);
     });
@@ -135,7 +160,8 @@ footer{margin-top:2rem;font-size:.95rem;color:color-mix(in srgb,var(--ink) 75%,v
   /* lightbox */
   var lb=$("lb"),lastFocus=null;
   function open(src,cap){
-    lastFocus=document.activeElement;
+    lastFocus=document.activeElement;tip.classList.remove("on");
+    $("lbbox").setAttribute("data-wm",wm());
     $("lbimg").src=src;$("lbimg").alt=cap;$("lbcap").textContent=cap;
     lb.hidden=false;$("lbx").focus();
   }
