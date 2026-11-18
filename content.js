@@ -21,8 +21,8 @@ window.SITE = {
      ro / en = descrierea pozei (apare la mărire și pentru cititoarele de ecran). */
   gallery: [
      { src: "desene/1.png", ro: "Mesagerul", en: "The Messenger" },
-     { src: "desene/2.png", ro: "Studiu de chip masculin", en: "Male face study" },
      { src: "desene/3.png", ro: "Studiu de culoare", en: "Saturated coloring study" },
+     { src: "desene/2.png", ro: "Studiu de chip masculin", en: "Male face study" },
      { src: "desene/4.png", ro: "Studiu de profil feminin", en: "Female profile study" },
      { src: "desene/5.png", ro: "Meet the artist", en: "Meet the artist" },
      { src: "desene/6.png", ro: "Studiu de pozitie dinamica, Inktober", en: "Dynamic pose study, Inktober" },
