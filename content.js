@@ -20,7 +20,7 @@ window.SITE = {
      Pune pozele în folderul "desene/" și adaugă câte o linie aici.
      ro / en = descrierea pozei (apare la mărire și pentru cititoarele de ecran). */
   gallery: [
-    // { src: "desene/01.jpg", ro: "Titlul desenului", en: "Drawing title" },
+     { src: "desene/design_trad1.jpg", ro: "Desen in creion 1", en: "Pencil drawing 1" },
     // { src: "desene/02.jpg", ro: "Alt desen",        en: "Another drawing" },
   ],
 
